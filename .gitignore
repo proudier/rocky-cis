@@ -1,0 +1,4 @@
+packer_cache
+packer_output
+packer-vm.img
+user.auto.pkrvars.hcl
