@@ -1,6 +1,6 @@
-# KVM image for Rocky Linux w/ CIS Level 1
+# QEMU image for Rocky Linux w/ CIS Level 1
 
-This repository hold a Packer template for a CIS Level 1 compliant Rocky Linux (RHEL) KVM/QEMU virtual machine.
+This repository hold a Packer template for a CIS Level 1 compliant Rocky Linux (RHEL) QEMU/KVM virtual machine.
 
 Compared to other implementations that run an Ansible playbook, as a second setup phase to harden the system (thus leaving the system exposed until Ansible is ran), this implementation hardens the system as part of the Anaconda installation process (ie. before the first boot).
 
@@ -16,19 +16,25 @@ The image is effectively 'passwordless':
 - An admin user with the login and public key provided at build time; its password has been randomized during the build process
 - A leftover Packer user with no `sudo` access and a randomized password
 
-
 ## Building the VM image
-
 ### Pre-requisite
+
+A Linux box. Building on MacOS is somewhat supported: I dont have a Mac at my disposal so testing relies on external feedback. Default values will always favor Linux hosts.
 
 Required on the build host:
 - [Packer](https://www.packer.io/)
-- QEMU/KVM
+- QEMU with KVM (Linux) or HVF (MacOS)
 
 ### User configuration
 
 - Create a `user.auto.pkrvars.hcl` file at the root of this repository that follows [this format](https://www.packer.io/guides/hcl/variables#from-a-file)
 - Populate values for the variables declared in [variables.pkr.hcl](variables.pkr.hcl)
+
+For builds on MacOS, make sure to have
+```
+qemu_accelerator=hvf
+qemu_display=cocoa
+ ```
 
 ### Building
 
@@ -63,7 +69,6 @@ ssh -A admin@rockycis
 ### Sudo asks for password
 
 Make sure you SSHed into the instance with agent forwarding: `ssh -A`
-
 
 ## Design notes
 
