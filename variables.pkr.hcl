@@ -9,7 +9,7 @@ variable "admin_public_key" {
 }
 
 #
-# System
+# Target system
 #
 variable "hostname" {
   type = string
@@ -18,4 +18,12 @@ variable "hostname" {
 variable "disk_size" {
   type = string
   default = "25G"
+}
+
+#
+# Building host
+#
+variable "qemu_accelerator" {
+  type = string
+  default = "kvm"
 }

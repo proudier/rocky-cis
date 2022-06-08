@@ -22,7 +22,7 @@ locals {
 data "sshkey" "packer" {}
 
 source "qemu" "vm" {
-  accelerator      = "kvm"
+  accelerator      = var.qemu_accelerator
   machine_type     = "q35"
   display          = "none"
   cpus             = 4
