@@ -10,7 +10,7 @@ reboot
 
 keyboard --vckeymap=us
 lang en_US.UTF-8
-timezone America/Toronto --utc
+timezone "${system_timezone}" --utc
 
 rootpw --lock
 user --name "${admin_user_name}" --groups wheel --password "${admin_user_pwd}"
