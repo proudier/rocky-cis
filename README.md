@@ -18,12 +18,13 @@ The image is effectively 'passwordless':
 
 
 ## Building the VM image
-
 ### Pre-requisite
 
 Required on the build host:
 - [Packer](https://www.packer.io/)
 - QEMU/KVM
+
+Building on MacOS is somewhat supported: I dont have one at my disposition for testing. I rely on feedback from a friend.
 
 ### User configuration
 
@@ -63,7 +64,6 @@ ssh -A admin@rockycis
 ### Sudo asks for password
 
 Make sure you SSHed into the instance with agent forwarding: `ssh -A`
-
 
 ## Design notes
 
