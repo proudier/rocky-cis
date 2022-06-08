@@ -45,6 +45,7 @@ source "qemu" "vm" {
       "admin_user_pwd"    = local.admin_user_pwd
       "admin_public_key"  = var.admin_public_key
       "hostname"          = var.hostname
+      "system_timezone"   = var.system_timezone
     })
   }
   ssh_username              = local.packer_user_name
