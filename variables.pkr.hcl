@@ -24,6 +24,12 @@ variable "disk_size" {
 # Building host
 #
 variable "qemu_accelerator" {
-  type = string
-  default = "kvm"
+  description = "Accelerator used by QEMU when building the image (eg. hvf, kvm)"
+  type        = string
+  default     = "kvm"
+}
+variable "qemu_display" {
+  description = "QEMU display to use (eg. cocoa, gtk)"
+  type        = string
+  default     = "gtk"
 }

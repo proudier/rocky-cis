@@ -24,7 +24,7 @@ data "sshkey" "packer" {}
 source "qemu" "vm" {
   accelerator      = var.qemu_accelerator
   machine_type     = "q35"
-  display          = "none"
+  display          = var.qemu_display
   cpus             = 4
   memory           = "4096"
   disk_size        = var.disk_size
