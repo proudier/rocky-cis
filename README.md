@@ -33,9 +33,13 @@ Required on the build host:
 ### Building
 
 ```bash
+# Run once to download plugins
+packer init -upgrade .
+
 # Packer refuses to run if `packer_output` already exits
 rm -fr packer_output
-packer build -timestamp-ui . | tee packer.log
+
+packer build -timestamp-ui .
 ```
 
 The output VM image is `packer_output/packer-vm`.
@@ -54,6 +58,11 @@ You **must** use SSH agent forwarding to be able to `sudo` in the VM. Read more 
 ```
 ssh -A admin@rockycis
 ```
+
+## Troubleshooting
+### Sudo asks for password
+
+Make sure you SSHed into the instance with agent forwarding: `ssh -A`
 
 
 ## Design notes
