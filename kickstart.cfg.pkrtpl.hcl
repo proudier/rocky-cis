@@ -85,12 +85,11 @@ chown root:root /etc/security/authorized_keys
 echo 'Defaults env_keep += "SSH_AUTH_SOCK"' >> /etc/sudoers
 sed -i '2i auth       sufficient   pam_ssh_agent_auth.so  file=/etc/security/authorized_keys' /etc/pam.d/sudo
 
-echo "CIS Level1 pass2 (just to be sure)"
-oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_cis_server_l1 --report eval_report.html --results eval_results.xml /usr/share/xml/scap/ssg/content/ssg-rl8-ds.xml
-oscap xccdf remediate --fetch-remote-resources --results remediate.out eval_results.xml /usr/share/xml/scap/ssg/content/ssg-rl8-ds.xml
-
 echo "Remediate to 'Set Default firewalld Zone for Incoming Packets' as it's not automatic"
 firewall-offline-cmd --zone=drop --add-service=ssh
 firewall-offline-cmd --set-default-zone=drop
+
+echo "Generating CIS report"
+oscap xccdf eval --fetch-remote-resources --profile xccdf_org.ssgproject.content_profile_cis_server_l1 --report post_install_eval.html /usr/share/xml/scap/ssg/content/ssg-rl8-ds.xml
 
 %end
