@@ -49,6 +49,19 @@ oscap xccdf remediate --fetch-remote-resources --results remediate.out eval_resu
 oscap xccdf generate fix --profile xccdf_org.ssgproject.content_profile_cis_server_l1 --fix-type bash --output scan_remediations.sh scan_results.xml
 ```
 
+### Firewalld default zone
+
+Another approach, instead of allow ssh on `drop`
+is to set the system interface to `public`
+
+firewall-offline-cmd --zone=public --add-interface=enp1s0
+firewall-offline-cmd --zone=public --add-service=ssh
+
+nmcli connection modify 'Wired connection 1' connection.zone public
+nmcli connection show 'Wired connection 1' | grep connection.zone
+
+https://bugzilla.redhat.com/show_bug.cgi?id=1757706#c2
+
 ## CIS Level 2
 
 [Profile](https://static.open-scap.org/ssg-guides/ssg-rhel8-guide-cis.html): `xccdf_org.ssgproject.content_profile_cis`
@@ -105,3 +118,18 @@ Encrypt passwords https://pykickstart.readthedocs.io/en/latest/commands.html#roo
 rootpw --iscrypted $6$/0RYeeRdK70ynvYz$jH2ZN/80HM6DjndHMxfUF9KIibwipitvizzXDH1zW.fTjyD3RD3tkNdNUaND18B/XqfAUW3vy1uebkBybCuIm0
 user --name=admin --groups=wheel --password=$6$Ga6ZnIlytrWpuCzO$q0LqT1USHpahzUafQM9jyHCY9BiE5/ahXLNWUMiVQnFGblu0WWGZ1e6icTaCGO4GNgZNtspp1Let/qpM7FMVB0 --iscrypted
 bootloader --location=mbr --append="crashkernel=auto rhgb quiet" --password=$6$zCPaBARiNlBYUAS7$40phthWpqvaPVz3QUeIK6n5qoazJDJD5Nlc9OKy5SyYoX9Rt4jFaLjzqJCwpgR4RVAEFSADsqQot0WKs5qNto0
+
+
+First boot
+```
+cat << 1757706-1 > /etc/cron.d/firstboot
+@reboot root /var/tmp/firstboot
+1757706-1
+cat << 1757706-2 > /var/tmp/firstboot
+#!/bin/bash
+/usr/bin/firewall-cmd -q --zone=public --add-interface=$NW --permanent
+rm -f /etc/cron.d/firstboot
+rm -f $(realpath \$0)
+1757706-2
+chmod 700 /var/tmp/firstboot
+```
