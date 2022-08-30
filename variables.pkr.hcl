@@ -9,7 +9,7 @@ variable "admin_public_key" {
 }
 
 #
-# System
+# Target system
 #
 variable "hostname" {
   type = string
@@ -23,4 +23,18 @@ variable "system_timezone" {
 variable "disk_size" {
   type = string
   default = "25G"
+}
+
+#
+# Building host
+#
+variable "qemu_accelerator" {
+  description = "Accelerator used by QEMU when building the image (eg. hvf, kvm)"
+  type        = string
+  default     = "kvm"
+}
+variable "qemu_display" {
+  description = "QEMU display to use (eg. cocoa, gtk)"
+  type        = string
+  default     = "gtk"
 }
