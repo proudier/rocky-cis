@@ -30,11 +30,11 @@ clearpart --all --initlabel
 part /boot --fstype=xfs --size=512 --label=boot
 part pv.01 --grow --size=1
 volgroup vg.01 --pesize=4096 pv.01
-logvol / --fstype=xfs --name=root --vgname=vg.01 --size=10240 --grow
-logvol /home --fstype=xfs --name=home --vgname=vg.01 --size=1024 --fsoptions="nodev"
+logvol / --fstype=xfs --name=root --vgname=vg.01 --size=10240
+logvol /home --fstype=xfs --name=home --vgname=vg.01 --size=4096 --fsoptions="nodev"
 logvol /tmp --fstype=xfs --name=tmp --vgname=vg.01 --size=1024 --fsoptions="nodev,noexec,nosuid"
 logvol /var/tmp --fstype=xfs --name=var_tmp --vgname=vg.01 --size=1024 --fsoptions="nodev,nosuid,noexec"
-logvol /var --fstype=xfs --name=var --vgname=vg.01 --size=3072
+logvol /var --fstype=xfs --name=var --vgname=vg.01 --size=4096
 logvol /var/log --fstype=xfs --name=var_log --vgname=vg.01 --size=1024
 logvol /var/log/audit --fstype=xfs --name=var_log_audit --vgname=vg.01 --size=512
 logvol swap --name=swap --vgname=vg.01 --size=1024

@@ -23,6 +23,7 @@ variable "system_timezone" {
 variable "disk_size" {
   type = string
   default = "25G"
+  description = "Logical size of the disk; the physical size will be less thanks to qcow. Must be greater or equal than 24G"
 }
 
 #
