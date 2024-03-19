@@ -2,6 +2,10 @@
 packer {
   required_version = ">= 1.8.0, < 2.0.0"
   required_plugins {
+    qemu = {
+      version = ">= 1.0.10"
+      source  = "github.com/hashicorp/qemu"
+    }
     sshkey = {
       version = ">= 1.0.1"
       source  = "github.com/ivoronin/sshkey"
