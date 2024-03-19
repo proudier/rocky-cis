@@ -57,7 +57,7 @@ Build logs are available in the image under `/var/log/anaconda` in the image.
 Use the tool you like to create a VM from the image. Here's an example with `virt-install`
 
 ```
-virt-install --name rockycis --memory 1536 --vcpus 2 --import --boot hd --os-variant rocky8.6 --disk path=packer_output/packer-vm,driver.discard=unmap --network network=default,model=virtio --graphics none --virt-type kvm --cpu host-passthrough --rng backend=/dev/random,model=virtio
+virt-install --name rockycis --memory 1536 --vcpus 2 --import --boot hd --os-variant rocky8-unknown --disk path=packer_output/packer-vm,driver.discard=unmap --network network=default,model=virtio --graphics none --virt-type kvm --cpu host-passthrough --rng backend=/dev/random,model=virtio
 ```
 
 You **must** use SSH agent forwarding to be able to `sudo` in the VM. Read more on PAM SSH Agent [here](https://github.com/jbeverly/pam_ssh_agent_auth).

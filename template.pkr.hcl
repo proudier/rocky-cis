@@ -32,8 +32,8 @@ source "qemu" "vm" {
   output_directory = "packer_output/"
   headless         = false
   # DVD image is required for `%addon org_fedora_oscap`
-  iso_url           = "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.6-x86_64-dvd1.iso"
-  iso_checksum      = "sha256:1d48e0af63d07ff4e582a1819348e714c694e7fd33207f48879c2bc806960786"
+  iso_url           = "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.9-x86_64-dvd1.iso"
+  iso_checksum      = "sha256:1abe38fd11279879e3e7658ef748c1ef06ee763351a53bb424020ec053c50d0b"
   boot_command      = ["<up><tab> inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg <enter><wait>"]
   boot_key_interval = "2ms"
   boot_wait         = "1s"
